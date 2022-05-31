@@ -1,9 +1,11 @@
+import { connectDatabase } from '../db';
 import './NullOrAny';
 
 beforeAll(async () => {
-  // add something to run before all tests
+  const { db, client } = await connectDatabase();
+  global.jestContext = { db, dbClient: client };
 });
 
 afterAll(async () => {
-  // add something to run after all tests
+  await global.jestContext.dbClient.close();
 });

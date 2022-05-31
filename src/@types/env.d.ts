@@ -3,5 +3,11 @@ declare namespace NodeJS {
     NODE_ENV: 'production' | 'development' | 'test';
     /** server port */
     PORT: string;
+    /** mongodb connection URI */
+    MONGO_DB_URI: string;
+    /** AES encryption/decryption key */
+    AES_KEY: string;
+    /** JWT signing secret */
+    JWT_SECRET: string;
   }
 }
