@@ -30,3 +30,9 @@ export const MalformedAuthTokenError = createServerErrorClass({
   defaultCode: StatusCodes.FORBIDDEN,
   defaultmessage: 'Malformed auth token is provided.',
 });
+
+export const UsernameExistsError = createServerErrorClass({
+  name: 'UsernameExistsError',
+  defaultCode: StatusCodes.PRECONDITION_FAILED,
+  defaultmessage: 'This username already exists.',
+});
