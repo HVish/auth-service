@@ -46,4 +46,29 @@ export default class UserService {
 
     return { userId, accessToken };
   }
+
+  async getAuthCode(userId: string, clientId: string) {
+    return this.userRepository.createAuthCode(userId, clientId);
+  }
+
+  async getAccessTokenByRefreshToken(
+    refreshToken: string
+  ): Promise<AuthResponse> {
+    // TODO: delete expired access-tokens and refresh tokens
+    const user = await this.userRepository.findOne({
+      refreshTokens: {
+        $elemMatch: {
+          value: refreshToken,
+          expiresAt: { $gte: Date.now() },
+        },
+      },
+    });
+
+    if (!user) throw new InvalidCredentialsError();
+
+    const { userId } = user;
+    const accessToken = await this.userRepository.createAccessToken(userId);
+
+    return { userId, accessToken };
+  }
 }
