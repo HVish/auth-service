@@ -1,7 +1,8 @@
-import { BaseUserWithoutId } from '../models/UserModel';
+import { AuthResponse } from '../interfaces/UserAPI';
+import userModel, { BaseUserWithoutId } from '../models/UserModel';
 import UserRepository from '../repositories/UserRepository';
-import { UsernameExistsError } from '../shared/errors';
-import UserService, { AuthResponse } from './UserService';
+import { InvalidCredentialsError, UsernameExistsError } from '../shared/errors';
+import UserService from './UserService';
 
 describe('UserService', () => {
   let userService: UserService;
@@ -15,8 +16,12 @@ describe('UserService', () => {
 
   beforeAll(async () => {
     const db = global.jestContext.db;
+
     const userRepository = new UserRepository({ db });
     userService = new UserService({ userRepository });
+
+    // insert user to test login with valid credentials
+    await userRepository.insertOne(await userModel(testUser));
   });
 
   const expectAuthResponse = (response: AuthResponse) => {
@@ -47,5 +52,36 @@ describe('UserService', () => {
     } catch (error) {
       expect(error).toBeInstanceOf(UsernameExistsError);
     }
+  });
+
+  test('login() should throw InvalidCredentialsError for invalid uesrname', async () => {
+    try {
+      const result = await userService.login({
+        username: 'invalid_username',
+        password: testUser.password,
+      });
+      expect(result).toBeUndefined();
+    } catch (error) {
+      expect(error).toBeInstanceOf(InvalidCredentialsError);
+    }
+  });
+
+  test('login() should throw InvalidCredentialsError for invalid password', async () => {
+    try {
+      await userService.login({
+        username: testUser.username,
+        password: 'invalid_password',
+      });
+    } catch (error) {
+      expect(error).toBeInstanceOf(InvalidCredentialsError);
+    }
+  });
+
+  test('login() should login with valid username and password', async () => {
+    const result = await userService.login({
+      username: testUser.username,
+      password: testUser.password,
+    });
+    expectAuthResponse(result);
   });
 });

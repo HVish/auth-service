@@ -40,7 +40,7 @@ export default async function clientModel({
   secret,
   clientId = generateId(),
   ...params
-}: Optional<BaseClient, 'clientId'>): Promise<ClientWithoutSecret> {
+}: Optional<BaseClient, 'clientId'>) {
   const { publicKey, privateKey } = await generateKeyPair('rsa', {
     modulusLength: 512,
     publicKeyEncoding: {
