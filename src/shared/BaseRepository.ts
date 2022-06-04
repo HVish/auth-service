@@ -1,4 +1,10 @@
-import { Db, Filter, OptionalUnlessRequiredId, UpdateFilter } from 'mongodb';
+import {
+  Db,
+  Filter,
+  FindOptions,
+  OptionalUnlessRequiredId,
+  UpdateFilter,
+} from 'mongodb';
 import { BaseModel } from './BaseModel';
 
 interface Deps {
@@ -18,12 +24,12 @@ export abstract class BaseRepository<T extends BaseModel> {
     return this.db.collection<T>(this.collectionName);
   }
 
-  public findOne(filter: Filter<T>) {
-    return this.getCollection().findOne(filter);
+  public findOne(filter: Filter<T>, options?: FindOptions) {
+    return this.getCollection().findOne(filter, options);
   }
 
-  public findMany(filter: Filter<T>) {
-    return this.getCollection().find(filter);
+  public findMany(filter: Filter<T>, options?: FindOptions) {
+    return this.getCollection().find(filter, options);
   }
 
   public insertOne(item: OptionalUnlessRequiredId<T>) {

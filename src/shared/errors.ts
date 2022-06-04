@@ -36,3 +36,9 @@ export const UsernameExistsError = createServerErrorClass({
   defaultCode: StatusCodes.PRECONDITION_FAILED,
   defaultmessage: 'This username already exists.',
 });
+
+export const UnSupportedGrantTypeError = createServerErrorClass({
+  name: 'UnSupportedGrantTypeError',
+  defaultCode: StatusCodes.FORBIDDEN,
+  defaultmessage: 'This grant type is not supported.',
+});
