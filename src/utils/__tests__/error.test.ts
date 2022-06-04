@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { createServerErrorClass } from './error';
+import { createServerErrorClass } from '../error';
 
 describe('createServerErrorClass', () => {
   const defaultmessage = 'default message';

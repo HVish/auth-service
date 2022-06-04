@@ -1,6 +1,6 @@
 import { Db, ObjectId } from 'mongodb';
-import { BaseModel } from './BaseModel';
-import { BaseRepository } from './BaseRepository';
+import { BaseModel } from '../BaseModel';
+import { BaseRepository } from '../BaseRepository';
 
 interface TestModel extends BaseModel {
   name: string;

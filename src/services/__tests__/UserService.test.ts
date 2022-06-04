@@ -1,9 +1,9 @@
-import { AuthResponse } from '../interfaces/UserAPI';
-import userModel, { BaseUserWithoutId } from '../models/UserModel';
-import UserRepository from '../repositories/UserRepository';
-import { InvalidCredentialsError, UsernameExistsError } from '../shared/errors';
-import { DateTime, DateTimeUnit } from '../utils/datetime';
-import UserService from './UserService';
+import { AuthResponse } from '../../interfaces/UserAPI';
+import userModel, { BaseUserWithoutId } from '../../models/UserModel';
+import UserRepository from '../../repositories/UserRepository';
+import { InvalidCredentialsError, UsernameExistsError } from '../../shared/errors';
+import { DateTime, DateTimeUnit } from '../../utils/datetime';
+import UserService from '../UserService';
 
 describe('UserService', () => {
   let userService: UserService;

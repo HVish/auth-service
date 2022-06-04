@@ -1,7 +1,7 @@
 import { TokenExpiredError } from 'jsonwebtoken';
-import { mockRSAKeyPair } from '../test-utils/mocks/jwt';
-import { DateTime, DateTimeUnit } from './datetime';
-import { InvalidJWTParamsError, JWT } from './jwt';
+import { mockRSAKeyPair } from '../../test-utils/mocks/jwt';
+import { DateTime, DateTimeUnit } from '../datetime';
+import { InvalidJWTParamsError, JWT } from '../jwt';
 
 describe('JWT', () => {
   test('JWT.create() should throw error when userId is empty', async () => {
@@ -23,7 +23,7 @@ describe('JWT', () => {
       JWT.create(params, mockRSAKeyPair.privateKey),
     ]);
 
-    results.forEach((result) => {
+    results.forEach(result => {
       expect(result).toEqual(
         expect.objectContaining({
           token: expect.any(String),

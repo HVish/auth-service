@@ -1,11 +1,13 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
+import { asValue, createContainer, InjectionMode, Lifetime } from 'awilix';
+import { loadControllers, scopePerRequest } from 'awilix-express';
 import cors from 'cors';
 import morgan from 'morgan';
+import { Db } from 'mongodb';
 
-import routes from './routes';
 import { ServerError } from './utils/error';
 
-function createServer(): Express {
+export default function createServer(db: Db): Express {
   const app = express();
 
   // middlewares
@@ -16,13 +18,27 @@ function createServer(): Express {
     app.use(morgan('dev'));
   }
 
-  // app routes
-  app.use(routes);
+  const container = createContainer({
+    injectionMode: InjectionMode.PROXY,
+  });
+
+  container.register({ db: asValue(db) });
+
+  container.loadModules(['repositories/*.ts', 'services/*.ts'], {
+    cwd: __dirname,
+    formatName: 'camelCase',
+    resolverOptions: { lifetime: Lifetime.SINGLETON },
+  });
+
+  app.use(scopePerRequest(container));
+
+  app.use(loadControllers('apis/*.ts', { cwd: __dirname, container }));
 
   app.get('/ping', (_req, res) => {
     res.send('pong');
   });
 
+  // register error handler
   app.use(
     (
       err: ServerError | Error,
@@ -45,7 +61,3 @@ function createServer(): Express {
 
   return app;
 }
-
-const server = createServer();
-
-export default server;

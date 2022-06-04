@@ -1,7 +1,7 @@
-import userModel, { User } from '../models/userModel';
-import { mockPrivateKey } from '../test-utils/mocks/jwt';
-import { DateTime, DateTimeUnit } from '../utils/datetime';
-import UserRepository from './UserRepository';
+import userModel, { User } from '../../models/userModel';
+import { mockPrivateKey } from '../../test-utils/mocks/jwt';
+import { DateTime, DateTimeUnit } from '../../utils/datetime';
+import UserRepository from '../UserRepository';
 
 describe('UserRepository', () => {
   let testUser: User;

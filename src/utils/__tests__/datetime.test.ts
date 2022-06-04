@@ -1,4 +1,4 @@
-import { DateTime, DateTimeUnit } from './datetime';
+import { DateTime, DateTimeUnit } from '../datetime';
 
 describe('DateTime', () => {
   test('toUnixTime() should convert date object to unix-timestamp', () => {
