@@ -24,7 +24,7 @@ export default function createServer(db: Db): Express {
 
   container.register({ db: asValue(db) });
 
-  container.loadModules(['repositories/*.ts', 'services/*.ts'], {
+  container.loadModules(['repositories/*.js', 'services/*.js'], {
     cwd: __dirname,
     formatName: 'camelCase',
     resolverOptions: { lifetime: Lifetime.SINGLETON },
@@ -32,7 +32,7 @@ export default function createServer(db: Db): Express {
 
   app.use(scopePerRequest(container));
 
-  app.use(loadControllers('apis/*.ts', { cwd: __dirname, container }));
+  app.use(loadControllers('apis/*.js', { cwd: __dirname, container }));
 
   app.get('/ping', (_req, res) => {
     res.send('pong');

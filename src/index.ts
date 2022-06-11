@@ -1,4 +1,4 @@
-import 'source-map-support';
+import 'source-map-support/register';
 import 'dotenv/config';
 
 import createServer from './server';
