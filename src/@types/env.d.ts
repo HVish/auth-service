@@ -9,5 +9,7 @@ declare namespace NodeJS {
     AES_KEY: string;
     /** JWT signing secret */
     JWT_SECRET: string;
+    /** Set to 'true' to disable built-in auth service user interface */
+    DISABLE_UI: 'true' | 'false';
   }
 }

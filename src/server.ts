@@ -1,3 +1,4 @@
+import path from 'path';
 import express, { Express, Request, Response, NextFunction } from 'express';
 import { asValue, createContainer, InjectionMode, Lifetime } from 'awilix';
 import { loadControllers, scopePerRequest } from 'awilix-express';
@@ -6,6 +7,7 @@ import morgan from 'morgan';
 import { Db } from 'mongodb';
 
 import { ServerError } from './utils/error';
+import { config } from './config';
 
 export default function createServer(db: Db): Express {
   const app = express();
@@ -37,6 +39,13 @@ export default function createServer(db: Db): Express {
   app.get('/ping', (_req, res) => {
     res.send('pong');
   });
+
+  if (!config.disableUI) {
+    app.use(express.static(path.join(__dirname, 'public')));
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { main } = require('./public/server.js');
+    main.registerUI(app);
+  }
 
   // register error handler
   app.use(
