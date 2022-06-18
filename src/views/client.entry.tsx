@@ -5,7 +5,8 @@ import App from './App';
 
 window.addEventListener('load', () => {
   ReactDOM.hydrateRoot(
-    document,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    document.getElementById('app')!,
     <BrowserRouter>
       <App />
     </BrowserRouter>

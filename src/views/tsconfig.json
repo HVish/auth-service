@@ -13,5 +13,6 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true
-  }
+  },
+  "include": ["./**/*.ts", "./**/*.tsx", "./custom.d.ts"]
 }

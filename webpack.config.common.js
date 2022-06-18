@@ -20,24 +20,20 @@ const common = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx'],
   },
 
   module: {
     rules: [
       {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: [{ loader: '@svgr/webpack' }],
+      },
+      {
         test: /\.(ts|tsx)$/,
         exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react',
-              '@babel/preset-typescript',
-            ],
-          },
-        },
+        use: 'ts-loader',
       },
     ],
   },

@@ -1,34 +1,24 @@
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import GlobalStyle from './components/GlobalStyle';
+import Layout from './components/Layout';
+import Authorize from './pages/Authorize';
+import Login from './pages/Login';
+import RegisterClient from './pages/RegisterClient';
+import Signup from './pages/Signup';
 
 export default function App() {
   return (
-    <html>
-      <head>
-        <title>Auth</title>
-      </head>
-      <body>
-        <Routes>
-          <Route
-            path="/about"
-            element={
-              <div>
-                About
-                <Link to="/">Go Home</Link>
-              </div>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <div>
-                Home<Link to="/about">About us</Link>
-              </div>
-            }
-          />
-        </Routes>
-        <script src="/main.js" />
-      </body>
-    </html>
+    <>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="register-client" element={<RegisterClient />} />
+          <Route path="authorize" element={<Authorize />} />
+        </Route>
+      </Routes>
+    </>
   );
 }

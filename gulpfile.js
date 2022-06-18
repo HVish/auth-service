@@ -36,9 +36,6 @@ function serverEntry() {
 function compileTs() {
   const stream = gulp
     .src(paths.src)
-    // Caching file causes issue in rebuilding after file change
-    // .pipe(cache.filter()) // remember files
-    // .pipe(cache.cache()) // cache them
     .pipe(sourcemaps.init())
     .pipe(tsProject())
     .pipe(sourcemaps.write('.'))

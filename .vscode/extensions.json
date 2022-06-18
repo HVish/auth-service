@@ -3,6 +3,7 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "mikestead.dotenv",
-    "EditorConfig.EditorConfig"
+    "editorconfig.editorconfig",
+    "styled-components.vscode-styled-components"
   ]
 }

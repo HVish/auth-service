@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "lib": ["es6"],
+    "lib": ["es6", "dom"],
     "allowJs": false,
     "outDir": "dist",
     "rootDir": "src",
@@ -17,6 +17,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["./src/**/*.ts", "./src/@types/*.d.ts"],
-  "exclude": ["node_modules", "./src/views"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/views/**/*.ts", "src/views/**/*.tsx"]
 }
