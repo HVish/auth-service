@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Root = styled.div`
+  position: relative;
   width: 360px;
   min-height: 400px;
   border-radius: 6px;

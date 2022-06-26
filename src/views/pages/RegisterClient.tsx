@@ -1,4 +1,7 @@
 import React, { FormEventHandler, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import Input from '../components/Input';
 import LinkIcon from '../assets/link.svg';
 import PersonIcon from '../assets/person.svg';
@@ -8,9 +11,23 @@ import Password from '../components/Password';
 import { registerClient } from '../shared/api';
 import AuthForm from '../components/AuthForm';
 
+const CreatedRoot = styled.div`
+  text-align: center;
+  margin-top: 2.5rem;
+`;
+
+const DashboardLink = styled(Link)`
+  position: absolute;
+  display: block;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 2rem;
+`;
+
 const RegisterClient = () => {
   const [isRegistering, setIsRegistering] = useState(false);
-  const [isCreated, setIsCreated] = useState(false);
+  const [isCreated, setIsCreated] = useState(true);
 
   const [name, setName] = useState({
     value: '',
@@ -81,13 +98,15 @@ const RegisterClient = () => {
       onSubmit={handleSubmit}
     >
       {isCreated ? (
-        <div className="auth__created">
+        <CreatedRoot>
           <VerifiedIcon width={48} height={48} color="#43a047" />
           <p>
             An account for <strong>{name.value}</strong> has been created.
           </p>
-          {/* TODO: add a link to go to dashboard */}
-        </div>
+          <DashboardLink to="/dashboard">
+            <Button type="button">Go to Dashboard</Button>
+          </DashboardLink>
+        </CreatedRoot>
       ) : (
         <>
           <Input

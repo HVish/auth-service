@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import ClientSummary from '../components/ClientSummary';
 import { getMyClients } from '../shared/api';
 import { clearSession, getAccessToken } from '../shared/session';
 import { Client } from '../shared/types';
 
 const Root = styled.div`
   display: grid;
-  gap: 1rem;
   background-color: #fff;
-  grid-template-areas: 'title logout' 'body body';
-  grid-template-rows: 64px 1fr;
+  grid-template-areas:
+    'title logout'
+    'body body';
+  grid-template-rows: 90px 1fr;
   grid-template-columns: 1fr auto;
   max-width: 1024px;
   min-height: 100vh;
   margin: auto;
-  box-shadow: 0px 0px 12px 1px rgb(0, 0, 0, 0.25);
 `;
 
 const Title = styled.div`
@@ -79,8 +80,11 @@ const Dashboard = () => {
       <Title>Your apps</Title>
       <Logout onClick={handleLogout}>Logout</Logout>
       <Body>
-        {isLoading ? 'Loading...' : null}
-        {/* TODO: add clients list here */}
+        {isLoading
+          ? 'Loading...'
+          : clients.map(client => (
+              <ClientSummary key={client._id} {...client} />
+            ))}
         {/* TODO: add client button here */}
       </Body>
     </Root>
