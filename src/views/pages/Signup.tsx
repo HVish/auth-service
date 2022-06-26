@@ -1,15 +1,18 @@
-import React, { FormEventHandler, useState } from 'react';
+import React, { FormEventHandler, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Input from '../components/Input';
 import EmailIcon from '../assets/email.svg';
 import PersonIcon from '../assets/person.svg';
 import Button from '../components/Button';
 import Password from '../components/Password';
 import { signup } from '../shared/api';
-import { setAccessToken } from '../shared/session';
+import { getAccessToken, setAccessToken } from '../shared/session';
 import { useClientParams } from '../shared/hooks';
 import AuthForm from '../components/AuthForm';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const { authorize } = useClientParams();
 
   const [isSigningUp, setIsSigningUp] = useState(false);
@@ -28,6 +31,11 @@ const Signup = () => {
     value: '',
     error: '',
   });
+
+  useEffect(() => {
+    const isAuthorized = getAccessToken();
+    if (isAuthorized) return navigate('/dashboard');
+  }, [navigate]);
 
   const handleSubmit: FormEventHandler = async e => {
     e.preventDefault();

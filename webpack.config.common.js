@@ -11,6 +11,7 @@ const paths = {
 
 const common = {
   context,
+  cache: true,
   devtool: 'source-map',
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
 

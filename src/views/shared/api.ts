@@ -40,7 +40,8 @@ interface VerifyClientResponse {
 }
 
 export async function verifyClient(data: VerifyClientPayload) {
-  return (await request.post<VerifyClientResponse>('/clients/v1/verify', data)).data;
+  return (await request.post<VerifyClientResponse>('/clients/v1/verify', data))
+    .data;
 }
 
 interface GetAuthCodeResponse {
@@ -48,13 +49,15 @@ interface GetAuthCodeResponse {
 }
 
 export async function getAuthCode(clientId: string) {
-  const accessToken = getAccessToken();
-  const response = await request.get<GetAuthCodeResponse>('/users/v1/auth-code', {
-    params: { clientId },
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const response = await request.get<GetAuthCodeResponse>(
+    '/users/v1/auth-code',
+    {
+      params: { clientId },
+      headers: {
+        authorization: `Bearer ${getAccessToken()}`,
+      },
+    }
+  );
   return response.data;
 }
 
@@ -66,10 +69,18 @@ interface RegisterClientPayload {
 }
 
 export async function registerClient(data: RegisterClientPayload) {
-  const accessToken = getAccessToken();
   const response = await request.post<Client>('/clients/v1', data, {
     headers: {
-      authorization: `Bearer ${accessToken}`,
+      authorization: `Bearer ${getAccessToken()}`,
+    },
+  });
+  return response.data;
+}
+
+export async function getMyClients() {
+  const response = await request.get<Client[]>('/clients/v1', {
+    headers: {
+      authorization: `Bearer ${getAccessToken()}`,
     },
   });
   return response.data;

@@ -86,6 +86,7 @@ const RegisterClient = () => {
           <p>
             An account for <strong>{name.value}</strong> has been created.
           </p>
+          {/* TODO: add a link to go to dashboard */}
         </div>
       ) : (
         <>

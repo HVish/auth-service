@@ -53,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "eslint": "^8.16.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
     "gulp-nodemon": "^2.5.0",

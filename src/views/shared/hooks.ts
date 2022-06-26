@@ -13,7 +13,9 @@ export function useClientParams() {
       ) {
         const { clientId, redirectURI } = state as Record<string, string>;
         navigate(`/authorize?clientId=${clientId}&redirectURI=${redirectURI}`);
+        return;
       }
+      navigate('/dashboard');
     },
     [navigate, state]
   );
