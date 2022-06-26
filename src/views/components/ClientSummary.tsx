@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Client, Client as ClientSummary } from '../shared/types';
+import Ellipsize from './Ellipsize';
 
 const Root = styled.div`
   display: inline-block;
@@ -31,7 +32,7 @@ const Header = styled.div`
   grid-template-columns: min-content 1fr;
   gap: 8px;
   margin-bottom: 8px;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
   align-items: center;
 `;
 
@@ -60,7 +61,7 @@ const ClientName = styled.div`
   font-weight: bold;
 `;
 
-const ClientId = styled.div`
+const ClientId = styled(Ellipsize)`
   grid-area: client-id;
   font-size: 12px;
 `;
@@ -83,7 +84,7 @@ const ClientSummary = ({
       <Header>
         <ClientLogoLetter>{getInitialLetter()}</ClientLogoLetter>
         <ClientName className="ellipsize">{name}</ClientName>
-        <ClientId className="ellipsize">
+        <ClientId className="ellipsize" contentToCopy={clientId}>
           <span className="label">ID:</span>
           {clientId}
         </ClientId>
@@ -91,9 +92,7 @@ const ClientSummary = ({
       <Body>
         <div className="label">Redirect URL(s):</div>
         {redirectURIs.map((url, index) => (
-          <div key={index} className="ellipsize">
-            {url}
-          </div>
+          <Ellipsize key={index}>{url}</Ellipsize>
         ))}
         <div>
           <span className="label">Created On:</span>
