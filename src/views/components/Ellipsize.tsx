@@ -35,6 +35,14 @@ const Root = styled.div`
   }
 `;
 
+/**
+ * Copies provided content to clipboard using `document.execCommand('copy')`
+ * @param text content to be copied
+ *
+ * @credits
+ * Thanks to Dean Taylor for the idea of this function.
+ * https://stackoverflow.com/a/30810322/9709887
+ */
 function fallbackCopyTextToClipboard(text: string) {
   const textArea = document.createElement('textarea');
   textArea.value = text;
@@ -59,6 +67,14 @@ function fallbackCopyTextToClipboard(text: string) {
   });
 }
 
+/**
+ * Copies provided content to clipboard
+ * @param text content to be copied
+ *
+ * @credits
+ * Thanks to Dean Taylor for the idea of this function.
+ * https://stackoverflow.com/a/30810322/9709887
+ */
 function copyTextToClipboard(text: string) {
   if (!navigator.clipboard) return fallbackCopyTextToClipboard(text);
   return navigator.clipboard.writeText(text);
