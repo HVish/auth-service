@@ -20,39 +20,39 @@ export abstract class BaseRepository<T extends BaseModel> {
     this.db = db;
   }
 
-  public getCollection() {
+  public get collection() {
     return this.db.collection<T>(this.collectionName);
   }
 
   public findOne(filter: Filter<T>, options?: FindOptions) {
-    return this.getCollection().findOne(filter, options);
+    return this.collection.findOne(filter, options);
   }
 
   public findMany(filter: Filter<T>, options?: FindOptions) {
-    return this.getCollection().find(filter, options);
+    return this.collection.find(filter, options);
   }
 
   public insertOne(item: OptionalUnlessRequiredId<T>) {
-    return this.getCollection().insertOne(item);
+    return this.collection.insertOne(item);
   }
 
   public insertMany(item: OptionalUnlessRequiredId<T>[]) {
-    return this.getCollection().insertMany(item);
+    return this.collection.insertMany(item);
   }
 
   public updateOne(filter: Filter<T>, item: UpdateFilter<T> | Partial<T>) {
-    return this.getCollection().updateOne(filter, item);
+    return this.collection.updateOne(filter, item);
   }
 
   public updateMany(filter: Filter<T>, item: UpdateFilter<T>) {
-    return this.getCollection().updateMany(filter, item);
+    return this.collection.updateMany(filter, item);
   }
 
   public deleteOne(filter: Filter<T>) {
-    return this.getCollection().deleteOne(filter);
+    return this.collection.deleteOne(filter);
   }
 
   public deleteMany(filter: Filter<T>) {
-    return this.getCollection().deleteMany(filter);
+    return this.collection.deleteMany(filter);
   }
 }

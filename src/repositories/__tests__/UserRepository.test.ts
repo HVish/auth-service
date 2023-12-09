@@ -1,4 +1,4 @@
-import userModel, { User } from '../../models/userModel';
+import userModel, { User } from '../../models/UserModel';
 import { mockPrivateKey } from '../../test-utils/mocks/jwt';
 import { DateTime, DateTimeUnit } from '../../utils/datetime';
 import UserRepository from '../UserRepository';

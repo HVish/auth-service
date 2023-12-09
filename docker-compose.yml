@@ -1,0 +1,30 @@
+volumes:
+  db-data:
+
+
+services:
+  mongodb:
+    image: mongo:6.0.6
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 27017:27017
+    volumes:
+      - 'db-data:/data/db'
+  app:
+    build:
+      context: .
+      target: development
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    volumes:
+      - ./src:/app/src
+      - ./scripts:/app/scripts
+    ports:
+      - "3000:3000"
+      - "9229:9229"

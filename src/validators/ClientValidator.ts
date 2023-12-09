@@ -15,7 +15,8 @@ export const createClientValidator = (joi: joi.Root) => ({
     name: joi.string().min(4).required(),
     redirectURIs: joi
       .array()
-      .items(joi.string().uri({ scheme: ['http', 'https'] })),
+      .items(joi.string().uri({ scheme: ['http', 'https'] }))
+      .required(),
     secret: joi.string().min(8).required(),
   }),
 });

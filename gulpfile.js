@@ -38,7 +38,7 @@ function compileTs() {
     .src(paths.src)
     .pipe(sourcemaps.init())
     .pipe(tsProject())
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write('.', { sourceRoot: path.join(__dirname, 'src') }))
     .pipe(gulp.dest(paths.dest)); // write them
   return stream; // important for gulp-nodemon to wait for completion
 }
